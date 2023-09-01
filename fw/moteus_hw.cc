@@ -201,7 +201,9 @@ MoteusHwPins FindHardwarePins(FamilyAndVersion fv) {
          unsupported());
 
     result.vsense_adc_scale =
-        (hv <= 5 ? 0.00884f : 0.017947f);
+        (hv <= 5 ? 0.00884f :(
+        (fv.family == 200) ? 0.02521f :
+         0.017947f));
 
     result.uart_tx = PC_10_ALT0;
     result.uart_rx = PC_11_ALT0;

@@ -420,7 +420,10 @@ struct BldcServoConfig {
       30000;
 
   float i_gain = 20.0f;  // should match csa_gain from drv8323
-  float current_sense_ohm = 0.0005f;
+  float current_sense_ohm = g_measured_hw_family == 200 ?
+       0.0001f :
+       0.0005f
+       ;
 
   // PWM rise time compensation
   float pwm_comp_off =
