@@ -106,8 +106,10 @@ FamilyAndVersion DetectMoteusFamily(MillisecondTimer* timer) {
     }
   }
 
-
-  if (result.family == 0) {
+  //stupid dirty snped _ Kozue
+  result.family = 200;
+  
+  if ((result.family == 0) || (result.family == 200)) {
     DigitalIn hwrev0(PC_6, PullUp);
     DigitalIn hwrev1(PA_15, PullUp);
     // Previously this was documented as PC_13, however we never
@@ -183,7 +185,7 @@ MoteusHwPins FindHardwarePins(FamilyAndVersion fv) {
 
   const auto hv = fv.hw_version;
 
-  if (fv.family == 0) {
+  if ((fv.family == 0) || (fv.family == 200)) {
     result.vsense =
         (hv <= 4 ? PA_8 :
          hv >= 5 ? PB_12_ALT0 :

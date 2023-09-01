@@ -430,6 +430,8 @@ struct BldcServoConfig {
         0.027f) :
       g_measured_hw_family == 1 ?
        0.027f :
+      g_measured_hw_family == 200 ?
+       0.027f :
       invalid_float()
       ;
   float pwm_comp_mag =
@@ -438,6 +440,8 @@ struct BldcServoConfig {
         (g_measured_hw_rev <= 7) ? 0.005f :
         0.005f) :
       g_measured_hw_family == 1 ?
+       0.005f :
+      g_measured_hw_family == 200 ?
        0.005f :
        invalid_float()
       ;
@@ -449,6 +453,8 @@ struct BldcServoConfig {
       ((g_measured_hw_rev <= 5) ? 37.0f : 46.0f) :
       g_measured_hw_family == 1 ?
       56.0f :
+      g_measured_hw_family == 200 ?
+      80.0f :
       invalid_float()
       ;
   float max_power_W = 450.0f;
@@ -529,6 +535,8 @@ struct BldcServoConfig {
       ((g_measured_hw_rev <= 5) ? 34.5f : 43.5f) :
       g_measured_hw_family == 1 ?
       53.0f :
+      g_measured_hw_family == 200 ?
+      77.0f :
       invalid_float();
   float flux_brake_resistance_ohm = 0.025f;
 
