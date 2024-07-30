@@ -731,7 +731,7 @@ class BldcServo::Impl {
     EnableAdc(ms_timer_, ADC4, kAdcPrescale, 0);
     EnableAdc(ms_timer_, ADC5, kAdcPrescale, 0);
 
-    if (family0_) {
+    if (family0_ || family200_) {
       adc1_sqr_ = ADC1->SQR1 =
           (0 << ADC_SQR1_L_Pos) |  // length 1
           FindSqr(options_.current2) << ADC_SQR1_SQ1_Pos;
@@ -761,7 +761,7 @@ class BldcServo::Impl {
       ADC5->SQR1 =
           (0 << ADC_SQR1_L_Pos) |  // length 1
           (vsense_sqr_ << ADC_SQR1_SQ1_Pos);
-    } else if (g_measured_hw_family == 0) {
+    } else if ((g_measured_hw_family == 0)||(g_measured_hw_family == 200)) {
       // For 5+, ADC4 always stays on the battery.
       adc4_sqr_ = ADC4->SQR1 =
           (0 << ADC_SQR1_L_Pos) |  // length 1
@@ -987,7 +987,7 @@ class BldcServo::Impl {
     status_.dwt.adc_done = DWT->CYCCNT;
 #endif
 
-    if (family0_) {
+    if (family0_ || family200_) {
       status_.adc_cur1_raw = ADC3->DR;
       status_.adc_cur2_raw = ADC1->DR;
       status_.adc_cur3_raw = ADC2->DR;
@@ -1011,7 +1011,7 @@ class BldcServo::Impl {
     if (family0_rev4_and_older_) {
       status_.adc_motor_temp_raw = ADC4->DR;
       status_.adc_voltage_sense_raw = ADC5->DR;
-    } else if (family0_) {
+    } else if (family0_ || family200_) {
       status_.adc_voltage_sense_raw = ADC4->DR;
       status_.adc_fet_temp_raw = ADC5->DR;
     } else if (family1or2_) {
@@ -1062,7 +1062,7 @@ class BldcServo::Impl {
       ADC5->SQR1 =
           (0 << ADC_SQR1_L_Pos) |  // length 1
           (vsense_sqr_ << ADC_SQR1_SQ1_Pos);
-    } else if (family0_) {
+    } else if (family0_ || family200_) {
       // Switch back to FET temp sense.
       ADC5->SQR1 =
           (0 << ADC_SQR1_L_Pos) |  // length 1
@@ -2421,6 +2421,8 @@ class BldcServo::Impl {
                             g_measured_hw_family == 2);
   const bool family1_ = (g_measured_hw_family == 1);
   const bool family2_ = (g_measured_hw_family == 2);
+  const bool family200_ = (g_measured_hw_family == 200);
+
 
   static Impl* g_impl_;
 };

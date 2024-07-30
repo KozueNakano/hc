@@ -128,7 +128,7 @@ FamilyAndVersion DetectMoteusFamily(MillisecondTimer* timer) {
     if (family_code == 0x02) {
       result.family = 2;
     } else if (family_code == 0x03) {
-      // If both are floating, then we are family 0 or 1.
+      // If both are floating, then we are family 0 or 1.or 200.
 
       // We check for family 1, "moteus n1", by seeing if we can find a
       // DRV8323 on a chip select that is different from that used on all
@@ -177,7 +177,9 @@ FamilyAndVersion DetectMoteusFamily(MillisecondTimer* timer) {
     }
   }
 
-  if (result.family == 0) {
+  result.family = 200;
+
+  if ((result.family == 0) || (result.family == 200)) {
     DigitalIn hwrev0(PC_6, PullUp);
     DigitalIn hwrev1(PA_15, PullUp);
     // Previously this was documented as PC_13, however we never
@@ -258,7 +260,7 @@ MoteusHwPins FindHardwarePins(FamilyAndVersion fv) {
 
   const auto hv = fv.hw_version;
 
-  if (fv.family == 0) {
+  if ((fv.family == 0) || (fv.family == 200)) {
     result.vsense =
         (hv <= 4 ? PA_8 :
          hv >= 5 ? PB_12_ALT0 :
@@ -274,7 +276,9 @@ MoteusHwPins FindHardwarePins(FamilyAndVersion fv) {
          unsupported());
 
     result.vsense_adc_scale =
-        (hv <= 5 ? 0.00884f : 0.017947f);
+        (hv <= 5 ? 0.00884f :(
+        (fv.family == 200) ? 0.02521f :
+         0.017947f));
 
     result.uart_tx = PC_10_ALT0;
     result.uart_rx = PC_11_ALT0;

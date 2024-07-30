@@ -427,6 +427,7 @@ struct BldcServoConfig {
   float i_gain = 20.0f;  // should match csa_gain from drv8323
   float current_sense_ohm =
       (g_measured_hw_family == 2 ? 0.002f :
+       g_measured_hw_family == 200 ? 0.0001f :
        0.0005f);
 
   // PWM rise time compensation
@@ -437,6 +438,7 @@ struct BldcServoConfig {
         0.027f) :
       g_measured_hw_family == 1 ? 0.027f :
       g_measured_hw_family == 2 ? 0.015f :
+      g_measured_hw_family == 200 ? 0.027f :
       invalid_float()
       ;
   float pwm_comp_mag =
@@ -446,12 +448,14 @@ struct BldcServoConfig {
         0.005f) :
       g_measured_hw_family == 1 ? 0.005f :
       g_measured_hw_family == 2 ? 0.003f :
+      g_measured_hw_family == 200 ? 0.005f :
       invalid_float()
       ;
   float pwm_scale =
       g_measured_hw_family == 0 ? 1.0f :
       g_measured_hw_family == 1 ? 1.0f :
       g_measured_hw_family == 2 ? 1.38f :
+      g_measured_hw_family == 200 ? 1.0f :
       invalid_float();
 
   // We pick a default maximum voltage based on the board revision.
@@ -460,12 +464,14 @@ struct BldcServoConfig {
       ((g_measured_hw_rev <= 5) ? 37.0f : 46.0f) :
       g_measured_hw_family == 1 ? 56.0f :
       g_measured_hw_family == 2 ? 54.0f :
+      g_measured_hw_family == 200 ? 80.0f :
       invalid_float()
       ;
   float max_power_W =
       (g_measured_hw_family == 0 ||
        g_measured_hw_family == 1) ? 450.0f :
       g_measured_hw_family == 2 ? 100.0f :
+      g_measured_hw_family == 200 ? 22500.0f :
       invalid_float();
 
   float derate_temperature = 50.0f;
@@ -550,6 +556,7 @@ struct BldcServoConfig {
       ((g_measured_hw_rev <= 5) ? 34.5f : 43.5f) :
       g_measured_hw_family == 1 ? 53.0f :
       g_measured_hw_family == 2 ? 51.0f :
+      g_measured_hw_family == 200 ? 77.0f :
       invalid_float();
   float flux_brake_resistance_ohm = 0.025f;
 
@@ -557,11 +564,13 @@ struct BldcServoConfig {
       (g_measured_hw_family == 0 ||
        g_measured_hw_family == 1) ? 100.0f :
       g_measured_hw_family == 2 ? 20.0f :
+      g_measured_hw_family == 200 ? 300.0f :
       invalid_float();
   float derate_current_A =
       (g_measured_hw_family == 0 ||
        g_measured_hw_family == 1) ? -20.0f :
       g_measured_hw_family == 2 ? -3.0f :
+      g_measured_hw_family == 200 ? -20.0f :
       invalid_float();
 
   // When the maximum velocity exceeds this value, a current limit

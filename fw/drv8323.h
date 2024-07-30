@@ -195,6 +195,7 @@ class Drv8323 : public MotorDriver {
           100) :
         g_measured_hw_family == 1 ? 150 :
         g_measured_hw_family == 2 ? 80 :
+        g_measured_hw_family == 200 ? 350 :
         invalid_int();
     uint16_t idriven_hs_ma =
         g_measured_hw_family == 0 ?
@@ -203,6 +204,7 @@ class Drv8323 : public MotorDriver {
           200) :
         g_measured_hw_family == 1 ? 300 :
         g_measured_hw_family == 2 ? 60 :
+        g_measured_hw_family == 200 ? 700 :
         invalid_int();
 
 
@@ -216,6 +218,7 @@ class Drv8323 : public MotorDriver {
           100) :
         g_measured_hw_family == 1 ? 150 :
         g_measured_hw_family == 2 ? 60 :
+        g_measured_hw_family == 200 ? 350 :
         invalid_int();
     uint16_t idriven_ls_ma =
         g_measured_hw_family == 0 ?
@@ -224,6 +227,7 @@ class Drv8323 : public MotorDriver {
           200) :
         g_measured_hw_family == 1 ? 300 :
         g_measured_hw_family == 2 ? 20 :
+        g_measured_hw_family == 200 ? 700 :
         invalid_int();
 
 
@@ -236,6 +240,7 @@ class Drv8323 : public MotorDriver {
           50) :
         g_measured_hw_family == 1 ? 50 :
         g_measured_hw_family == 2 ? 50 :
+        g_measured_hw_family == 200 ? 50 :
         invalid_int();
     OcpMode ocp_mode = OcpMode::kLatchedFault;
     uint8_t ocp_deg_us = 4;  // valid options of 2, 4, 6, 8
@@ -250,6 +255,7 @@ class Drv8323 : public MotorDriver {
           700) :
         g_measured_hw_family == 1 ? 700 :
         g_measured_hw_family == 2 ? 700 :
+        g_measured_hw_family == 200 ? 500 :
         invalid_int();
 
 

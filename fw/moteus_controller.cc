@@ -347,7 +347,7 @@ enum class Register {
 aux::AuxHardwareConfig GetAux1HardwareConfig() {
   auto aux_options = aux::AuxExtraOptions();
 
-  if (g_measured_hw_family == 0) {
+  if ((g_measured_hw_family == 0)||(g_measured_hw_family == 200)) {
     return aux::AuxHardwareConfig{
       {{
           //          ADC#  CHN    I2C      SPI      USART    TIMER
@@ -396,7 +396,7 @@ aux::AuxHardwareConfig GetAux1HardwareConfig() {
 aux::AuxHardwareConfig GetAux2HardwareConfig() {
   auto aux_options = aux::AuxExtraOptions();
 
-  if (g_measured_hw_family == 0) {
+  if ((g_measured_hw_family == 0)||(g_measured_hw_family == 200)) {
     return aux::AuxHardwareConfig{
       {{
           //          ADC#  CHN    I2C      SPI      USART    TIMER
