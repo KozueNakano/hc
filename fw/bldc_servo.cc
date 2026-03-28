@@ -157,6 +157,7 @@ struct RateConfig {
     const int board_min_pwm_rate_hz =
         (g_measured_hw_family == 0 &&
          g_measured_hw_rev == 2) ? 60000 :
+         g_measured_hw_family == 200 ? 8000 :
         15000;
 
     // Limit our PWM rate to even frequencies between 15kHz and 60kHz.

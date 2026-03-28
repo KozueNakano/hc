@@ -10,3 +10,4 @@ fw/.mbedignore
 
 /bazel-*
 hw/c1/#auto_saved_files#
+*.log

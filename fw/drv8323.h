@@ -195,7 +195,7 @@ class Drv8323 : public MotorDriver {
           100) :
         g_measured_hw_family == 1 ? 150 :
         g_measured_hw_family == 2 ? 80 :
-        g_measured_hw_family == 200 ? 350 :
+        g_measured_hw_family == 200 ? 700 :
         invalid_int();
     uint16_t idriven_hs_ma =
         g_measured_hw_family == 0 ?
@@ -204,13 +204,15 @@ class Drv8323 : public MotorDriver {
           200) :
         g_measured_hw_family == 1 ? 300 :
         g_measured_hw_family == 2 ? 60 :
-        g_measured_hw_family == 200 ? 700 :
+        g_measured_hw_family == 200 ? 1800 :
         invalid_int();
 
 
     // Gate Drive LS Register
     bool cbc = true;  // Cycle-by cycle operation.
-    uint16_t tdrive_ns = 1000;  // peak gate-current drive time
+    uint16_t tdrive_ns = 
+    g_measured_hw_family == 200 ? 2000 :
+    1000;  // peak gate-current drive time
     uint16_t idrivep_ls_ma =
         g_measured_hw_family == 0 ?
          ((g_measured_hw_rev <= 6) ? 370 :
@@ -218,7 +220,7 @@ class Drv8323 : public MotorDriver {
           100) :
         g_measured_hw_family == 1 ? 150 :
         g_measured_hw_family == 2 ? 60 :
-        g_measured_hw_family == 200 ? 350 :
+        g_measured_hw_family == 200 ? 700 :
         invalid_int();
     uint16_t idriven_ls_ma =
         g_measured_hw_family == 0 ?
@@ -227,7 +229,7 @@ class Drv8323 : public MotorDriver {
           200) :
         g_measured_hw_family == 1 ? 300 :
         g_measured_hw_family == 2 ? 20 :
-        g_measured_hw_family == 200 ? 700 :
+        g_measured_hw_family == 200 ? 1800 :
         invalid_int();
 
 
@@ -255,7 +257,7 @@ class Drv8323 : public MotorDriver {
           700) :
         g_measured_hw_family == 1 ? 700 :
         g_measured_hw_family == 2 ? 700 :
-        g_measured_hw_family == 200 ? 500 :
+        g_measured_hw_family == 200 ? 700 :
         invalid_int();
 
 

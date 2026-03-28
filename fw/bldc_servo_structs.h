@@ -422,12 +422,13 @@ struct BldcServoConfig {
   uint16_t pwm_rate_hz =
       (g_measured_hw_family == 0 &&
        g_measured_hw_rev <= 2) ? 60000 :
+       g_measured_hw_family == 200 ? 8000 :
       30000;
 
   float i_gain = 20.0f;  // should match csa_gain from drv8323
   float current_sense_ohm =
       (g_measured_hw_family == 2 ? 0.002f :
-       g_measured_hw_family == 200 ? 0.0001f :
+       g_measured_hw_family == 200 ? 0.000167f :
        0.0005f);
 
   // PWM rise time compensation
